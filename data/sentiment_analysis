@@ -1,0 +1,30 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+# Load the dataset for sentiment analysis
+def load_sentiment_analysis_data(file_path):
+    # Read the dataset
+    data = pd.read_csv(file_path)
+    
+    # Basic preprocessing
+    data.dropna(inplace=True)  # Remove missing values
+    data['label'] = data['label'].map({'positive': 1, 'negative': 0, 'neutral': 2})  # Encode labels
+
+    return data
+
+# Split the dataset into training and testing sets
+def split_data(data, test_size=0.2):
+    train_data, test_data = train_test_split(data, test_size=test_size, random_state=42)
+    return train_data, test_data
+
+# Example usage
+if __name__ == "__main__":
+    # Specify the path to the sentiment analysis dataset
+    dataset_path = 'data/sentiment_analysis/sentiment_data.csv'
+    
+    # Load and split the data
+    sentiment_data = load_sentiment_analysis_data(dataset_path)
+    train_data, test_data = split_data(sentiment_data)
+
+    print("Training data shape:", train_data.shape)
+    print("Testing data shape:", test_data.shape)

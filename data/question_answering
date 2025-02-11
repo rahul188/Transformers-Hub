@@ -1,0 +1,31 @@
+import pandas as pd
+from datasets import load_dataset
+
+def load_qa_data():
+    dataset = load_dataset("squad")
+    train_data = dataset['train']
+    return train_data
+
+def preprocess_qa_data(data):
+    questions = data['question']
+    contexts = data['context']
+    answers = data['answers']['text']
+    
+    qa_pairs = []
+    for question, context, answer in zip(questions, contexts, answers):
+        qa_pairs.append({
+            'question': question,
+            'context': context,
+            'answer': answer[0] if answer else None
+        })
+    
+    return pd.DataFrame(qa_pairs)
+
+def get_qa_dataset():
+    raw_data = load_qa_data()
+    processed_data = preprocess_qa_data(raw_data)
+    return processed_data
+
+if __name__ == "__main__":
+    qa_dataset = get_qa_dataset()
+    print(qa_dataset.head())

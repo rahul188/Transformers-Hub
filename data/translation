@@ -1,0 +1,28 @@
+import pandas as pd
+from datasets import load_dataset
+
+def load_translation_data():
+    # Load a translation dataset from Hugging Face Datasets
+    dataset = load_dataset("tatoeba", "en-fr")  # Example: English to French translation
+    return dataset
+
+def preprocess_translation_data(dataset):
+    # Preprocess the dataset for translation tasks
+    train_data = dataset['train']
+    test_data = dataset['test']
+    
+    train_df = pd.DataFrame({
+        'source': train_data['en'],
+        'target': train_data['fr']
+    })
+    
+    test_df = pd.DataFrame({
+        'source': test_data['en'],
+        'target': test_data['fr']
+    })
+    
+    return train_df, test_df
+
+# Load and preprocess the translation data
+translation_dataset = load_translation_data()
+train_df, test_df = preprocess_translation_data(translation_dataset)
