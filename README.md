@@ -69,10 +69,6 @@ To run the Docker container:
 docker run -p 8501:8501 transformer-hub
 ```
 
-## 📄 License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
